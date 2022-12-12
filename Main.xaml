@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1150,719.3333333333334" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="964,719.3333333333334" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ueabf="clr-namespace:UiPath.Excel.Activities.Business.Filter;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
       <x:String>System.Activities</x:String>
@@ -118,6 +118,15 @@
       <Variable x:TypeArguments="x:String" Name="credentials" />
       <Variable x:TypeArguments="x:String" Name="password" />
       <Variable x:TypeArguments="sd:DataTable" Name="copiedColumns" />
+      <Variable x:TypeArguments="x:String" Name="cashIn" />
+      <Variable x:TypeArguments="x:String" Name="onUsCheck" />
+      <Variable x:TypeArguments="x:String" Name="notOnUsCheck" />
+      <Variable x:TypeArguments="x:Int32" Name="sum" />
+      <Variable x:TypeArguments="x:String" Name="five">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">5</Literal>
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -178,14 +187,14 @@
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,906" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="592,2024.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into Username" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="338,62.666666666666664" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Text="[username]" Version="V3">
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into Username" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="530,62.666666666666664" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Text="[username]" Version="V3">
               <uix:NTypeInto.Target>
                 <uix:TargetAnchorable DesignTimeRectangle="166, 135, 180, 35" DesignTimeScaleFactor="1.5" ElementType="InputBox" FriendlyName="'editable text user'" FullSelectorArgument="&lt;ctrl automationid='user' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='user' role='editable text' /&gt;" Guid="f4bcdb95-c907-493c-9987-345225c22580" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALgAAAAnCAYAAAC8A4JRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAFpSURBVHhe7d09TgNBEERh7n8TMATAPWyMuIN3xz7C/qCxQCKonWk7oUt6T6pg8y/oaPZhJUrcsiw3bZ7n66Zpug7glDqFuLVN4LuXd8bS7en57a5J4B/Hr7WcL4yl2VjON21/+NwGXsrl54soR+oMaW0YCsDJJ4W4tQr8cfcKcPJIIW4N4GSVQtwawMkqhbg1gJNVCnFrACerFOLWAE5WKcStAZxsUoB7O51GgJNHCnBvACebFODeAE42KcC9AZxsUoB7AzjZpAD3BnCySQHuDeBkkwLcG8DJIoU3MoCTRQpvZAAnixTeyABOFim8kQGcLFJ4IwM4WaTwRgZwskjhjQzgZJHCGxnAKX0KbmT1yTaAU/oU3sgAThYpvJEBnCxSeCMDOFmk8EYGcLJI4Y0M4GSRwhtZFzjvg7MMU+9+RzaMZd0fjtvAGfvv/f1Lwz2ruCVwogyp0yOyep7U/cIGOKVM4Y1MA5/Wbz6MtP7EEsCxAAAAAElFTkSuQmCC" InformativeScreenshot="9452612e34fe21b117ed259dc47cce3a.png" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UiDemo' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" />
               </uix:NTypeInto.Target>
@@ -196,7 +205,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NTypeInto>
-            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="338,62.666666666666664" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Text="password" Version="V3">
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="530,62.666666666666664" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Text="password" Version="V3">
               <uix:NTypeInto.Target>
                 <uix:TargetAnchorable DesignTimeRectangle="166, 200, 180, 34" DesignTimeScaleFactor="1.5" ElementType="InputBoxPassword" FriendlyName="'editable text pass'" FullSelectorArgument="&lt;ctrl automationid='pass' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='pass' role='editable text' /&gt;" Guid="fc294e6d-035b-4806-b57d-411fa1ad7b41" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALgAAAAmCAYAAAB3X1H0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAFJSURBVHhe7dw9TgNBEERh7n8UfhI4CLbgErvrK+yuZQSBcWmqDUmX9J5UweRfMFE/7ETN27btT1vXdQc4tU/hrewK+NPLG2Mt9/j8evck8MPxc5+XE2NtNs3LXXs/fHwBv+C+AT7Pp+8XUY9+fzvcpmkBOOWkEI8GcIpKIR4N4BSVQjwawCkqhXg0gFNUCvFoAKeoFOLRAE4xKcBuAKeYFGA3gFNMCrAbwCkmBdgN4BSTAuwGcIpJAXYDOMWkALsBnGJSgN0ATjEpwG4Ap5gUYDeAU0wKsBvAKSYF2A3gFJMC7AZwikkBdgM4xaQAuwGcYlKA3QBOESm8lQGcIlJ4KwM4RaTwVgZwikjhrQzgFJHCWxnAKSKFtzKAU0QKb2VD4JxPZl2mTiNXNjyfzFiXXZD+ZzfAiTqlvh+V/cAGOLVO4a3sGvi6nwE8htzLGKgn/wAAAABJRU5ErkJggg==" InformativeScreenshot="591b64225f708dfe207c48d244982f53.png" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UiDemo' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" />
               </uix:NTypeInto.Target>
@@ -207,7 +216,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NTypeInto>
-            <uix:NClick ClickType="Single" DisplayName="Click 'Log In'" sap:VirtualizedContainerService.HintSize="338,62.666666666666664" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Version="V3">
+            <uix:NClick ClickType="Single" DisplayName="Click 'Log In'" sap:VirtualizedContainerService.HintSize="530,62.666666666666664" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Version="V3">
               <uix:NClick.Target>
                 <uix:TargetAnchorable DesignTimeRectangle="148, 287, 112, 29" DesignTimeScaleFactor="1.5" ElementType="Button" FriendlyName="'Log In'" FullSelectorArgument="&lt;ctrl name='Log In' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Log In' role='push button' automationid='' check:text='Log In' /&gt;" Guid="61df8203-4cde-411f-8ae0-bc638f6c6e39" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHQAAAAhCAYAAAAI2Y9jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAGhSURBVGhD7ZrdqYQwEEZF7Ee4WM2+2IId+GIfchFsQrAAW1BrmbvGvyTG6IrXNfEbOA+7mSjMcWZ10SGEVQGhlsUkNIoiYDBjCELzPKeqqoBBdM5WhXYJbdsCg+icQahFQKhlQKhlQKhlQKhlQKhl3FZonb7IcQNKSvX6ZTQFxb5DXpip128GhG4BoecAoceA0C0g9Bz2CmV5jjOztqdO6cXneSH97jmHQmhTxOSzfTWlL/GYGb/3CxgsdCimkNNQEfvv4noUZnMuE+C4FCTl9N10IRwVyiRy5xny3CChctz7BYwVOneJvNaLngvbf16OzEH+YaHiBdKxd6r8J4YK7WWsdYOwl43aZfEXedLahHbkirm9aHE6XI2hQuUuFOH36ooMoReiL/b+DoXQIe4tVLcuda9CCJ8HoRex3T0qIeobHXass+9yIfQzpoIv4As2PqZw6yvPgvLxOkHbF80bCDUHJvQGfwacyYOF6u+UTeUBQrux/CONQfVvrQ08okOVv8eWjdqRRwh9ElqheHPePLRvzgNzGWMSirAjINSqIPoDKIx7WZfoB7AAAAAASUVORK5CYII=" InformativeScreenshot="0399cbe9a0b45abc478e65d9645fd719.png" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UiDemo' /&gt;" SearchSteps="Selector, Image" Version="V1" Visibility="Interactive" />
               </uix:NClick.Target>
@@ -218,7 +227,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </uix:NClick>
-            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="338,96.66666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="C:\Users\KEN20967\Documents\UiPath\UiDemoTest\UiDemo-Transactions.xlsx">
+            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="530,96.66666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="C:\Users\KEN20967\Documents\UiPath\UiDemoTest\UiDemo-Transactions.xlsx">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -226,34 +235,20 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ReadRange>
-            <Assign sap:VirtualizedContainerService.HintSize="338,72" sap2010:WorkflowViewState.IdRef="Assign_4">
-              <Assign.To>
-                <OutArgument x:TypeArguments="sd:DataTable">[copiedColumns]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="sd:DataTable">[dataTable.DefaultView.ToTable(false,dataTable.Columns("OnUsCheck").ColumnName,dataTable.Columns("NotOnUsCheck").ColumnName)]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="338,62.666666666666664" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="530,62.666666666666664" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,93.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="cashIn" />
-                      <Variable x:TypeArguments="x:String" Name="onUsCheck" />
-                      <Variable x:TypeArguments="x:String" Name="notOnUsCheck" />
-                      <Variable x:TypeArguments="x:Int32" Name="sum" />
-                    </Sequence.Variables>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="544.6666666666666,706" sap2010:WorkflowViewState.IdRef="Sequence_7">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="482.6666666666667,170.66666666666666" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="482.6666666666667,62.666666666666664" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -282,6 +277,12 @@
                           </ui:AssignOperation>
                         </scg:List>
                       </ui:MultipleAssign.AssignOperations>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
                     </ui:MultipleAssign>
                     <Assign sap:VirtualizedContainerService.HintSize="482.6666666666667,72" sap2010:WorkflowViewState.IdRef="Assign_3">
                       <Assign.To>
@@ -291,22 +292,24 @@
                         <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(onUsCheck)+Convert.ToInt32(notOnUsCheck)]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <If Condition="[sum&gt;=1000]" sap:VirtualizedContainerService.HintSize="482.6666666666667,930.6666666666666" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If Condition="[sum&gt;=1000]" sap:VirtualizedContainerService.HintSize="482.6666666666667,369.3333333333333" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
-                        <Sequence DisplayName="SequenceThen" sap:VirtualizedContainerService.HintSize="400,226.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                        <Sequence DisplayName="SequenceThen" sap:VirtualizedContainerService.HintSize="400,93.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_8">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,104.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;sum is greater than 1000&quot;]" />
                         </Sequence>
                       </If.Then>
                       <If.Else>
-                        <Sequence sap:VirtualizedContainerService.HintSize="400,534.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                        <Sequence sap:VirtualizedContainerService.HintSize="400,93.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'CashIn'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="338,62.666666666666664" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="4cdc1d44-af96-4863-844b-347fb8768dce" Text="[cashIn]" Version="V3">
@@ -362,7 +365,89 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEachRow>
-            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[copiedColumns]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="338,124.66666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet2" WorkbookPath="C:\Users\KEN20967\Documents\UiPath\UiDemoTest\UiDemo-Transactions.xlsx" />
+            <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="530,1078.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" WorkbookPath="C:\Users\KEN20967\Documents\UiPath\UiDemoTest\UiDemo-Transactions.xlsx">
+              <ueab:ExcelApplicationCard.Body>
+                <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,789.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:FilterDataTable DataTable="[dataTable]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="434,172.66666666666666" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[copiedColumns]" SelectColumnsMode="Keep">
+                      <ui:FilterDataTable.Filters>
+                        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                          <ui:FilterOperationArgument BooleanOperator="And" Operator="LT">
+                            <ui:FilterOperationArgument.Column>
+                              <InArgument x:TypeArguments="x:String">["cashin"]</InArgument>
+                            </ui:FilterOperationArgument.Column>
+                            <ui:FilterOperationArgument.Operand>
+                              <InArgument x:TypeArguments="x:Int32">[5]</InArgument>
+                            </ui:FilterOperationArgument.Operand>
+                          </ui:FilterOperationArgument>
+                        </scg:List>
+                      </ui:FilterDataTable.Filters>
+                      <ui:FilterDataTable.SelectColumns>
+                        <scg:List x:TypeArguments="InArgument" Capacity="4">
+                          <x:Null />
+                        </scg:List>
+                      </ui:FilterDataTable.SelectColumns>
+                    </ui:FilterDataTable>
+                    <ueab:FilterX ClearFilter="False" ColumnName="CashIn" DisplayName="Filter" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,180.66666666666666" sap2010:WorkflowViewState.IdRef="FilterX_1" Range="[Excel.Sheet(&quot;Sheet1&quot;)]">
+                      <ueab:FilterX.FilterArgument>
+                        <ueabf:FilterArgument Mode="Advanced">
+                          <ueabf:FilterArgument.AdvancedFiltersArgument>
+                            <ueabf:AdvancedFilterArgument LogicalOperator="And">
+                              <ueabf:AdvancedFilterArgument.Condition1>
+                                <ueabf:AdvancedFilterCondition Operator="GTE" Value="[five]" />
+                              </ueabf:AdvancedFilterArgument.Condition1>
+                              <ueabf:AdvancedFilterArgument.Condition2>
+                                <ueabf:AdvancedFilterCondition Value="{x:Null}" Operator="NONE" />
+                              </ueabf:AdvancedFilterArgument.Condition2>
+                            </ueabf:AdvancedFilterArgument>
+                          </ueabf:FilterArgument.AdvancedFiltersArgument>
+                          <ueabf:FilterArgument.BasicFiltersArgument>
+                            <ueabf:BasicFilterArgument>
+                              <ueabf:BasicFilterArgument.BasicFilters>
+                                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="1">
+                                  <InArgument x:TypeArguments="x:String">[&gt; 5]</InArgument>
+                                </scg:List>
+                              </ueabf:BasicFilterArgument.BasicFilters>
+                            </ueabf:BasicFilterArgument>
+                          </ueabf:FilterArgument.BasicFiltersArgument>
+                        </ueabf:FilterArgument>
+                      </ueab:FilterX.FilterArgument>
+                    </ueab:FilterX>
+                    <ueab:SortX DisplayName="Sort Range" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,234" sap2010:WorkflowViewState.IdRef="SortX_1" Range="[Excel.Sheet(&quot;Sheet1&quot;)]">
+                      <ueab:SortX.Body>
+                        <ActivityAction>
+                          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ueab:SortColumnX ColumnName="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A1&quot;)]" DisplayName="Sort By Column" sap:VirtualizedContainerService.HintSize="382,72.66666666666667" sap2010:WorkflowViewState.IdRef="SortColumnX_1" SortDirection="Descending" />
+                          </Sequence>
+                        </ActivityAction>
+                      </ueab:SortX.Body>
+                    </ueab:SortX>
+                  </Sequence>
+                </ActivityAction>
+              </ueab:ExcelApplicationCard.Body>
+            </ueab:ExcelApplicationCard>
+            <Assign sap:VirtualizedContainerService.HintSize="530,72" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[copiedColumns]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dataTable.DefaultView.ToTable(false,dataTable.Columns("OnUsCheck").ColumnName,dataTable.Columns("NotOnUsCheck").ColumnName)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[copiedColumns]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="530,124.66666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet2" WorkbookPath="C:\Users\KEN20967\Documents\UiPath\UiDemoTest\UiDemo-Transactions.xlsx" />
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
